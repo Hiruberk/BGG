@@ -11,16 +11,55 @@ namespace BGGApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
+        private BGGDAL bGGDAL = new BGGDAL();
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult CollectionDisplay(List<string> usernames)
+        {
+            List<CollectionRoot> collections = new List<CollectionRoot>();
+            List<GameRoot> games = new List<GameRoot>();
+            try
+            {
+                foreach (string name in usernames)
+                {
+                    collections.Add(bGGDAL.GetCollection(name));
+                }
+
+            }catch(Exception e)
+            {
+                TempData["Error"] = e.ToString();
+                return RedirectToAction("Index");
+            }
+
+            foreach(CollectionRoot c in collections)
+            {
+                foreach(Item i in c.items.item)
+                {
+                    if (!String.IsNullOrEmpty(i._attributes.objectid))
+                    {
+                        GameRoot game = new GameRoot();
+                        game = bGGDAL.GetGame(i._attributes.objectid);
+                        games.Add(game);
+                    }
+
+                }
+            }
+
+            if(games.Count > 0)
+            {
+                return View(games);
+            }
+            else
+            {
+                TempData["Error"] = "No games were found in your collection, please update your collection.";
+                return RedirectToAction("Index");
+            }
+
+
         }
 
         public IActionResult Privacy()

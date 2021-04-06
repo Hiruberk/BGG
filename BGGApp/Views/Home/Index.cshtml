@@ -1,8 +1,23 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+
+<h2 style="color: red"><strong>@TempData.Peek("Error")</strong></h2>
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Welcome to TabletopHelper or RandyTabbyTop!</h1>
+    <p>Have you ever gone over to a friends house and you have too many board games to pick one?<br />
+        This website allows you enter your BoardGameGeek username, so we can search each player's collection.
+    </p>
 </div>
+
+
+
+
+<form style="display: none" id="users" asp-action="CollectionDisplay" asp-controller="Home">
+    <label>Please enter your player's Board Game Geek usernames:</label>
+    @for (int i = 0; i < 3; i++)
+    {
+        <input type="text" name="username" />
+    }
+    <input type="submit" value="Grab a Game!" />
+
+</form>
