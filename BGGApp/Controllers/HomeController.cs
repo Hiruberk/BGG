@@ -18,15 +18,15 @@ namespace BGGApp.Controllers
             return View();
         }
 
-        public IActionResult CollectionDisplay(List<string> usernames)
+        public IActionResult CollectionDisplay(string[] username)
         {
             List<CollectionRoot> collections = new List<CollectionRoot>();
             List<GameRoot> games = new List<GameRoot>();
             try
             {
-                foreach (string name in usernames)
+                foreach (string name in username)
                 {
-                    collections.Add(bGGDAL.GetCollection(name));
+                    collections.Add(bGGDAL.GetCollection(name.Trim()));
                 }
 
             }catch(Exception e)

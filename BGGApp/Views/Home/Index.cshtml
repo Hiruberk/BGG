@@ -1,23 +1,95 @@
 ﻿
-
 <h2 style="color: red"><strong>@TempData.Peek("Error")</strong></h2>
 
 <div class="text-center">
     <h1 class="display-4">Welcome to TabletopHelper or RandyTabbyTop!</h1>
-    <p>Have you ever gone over to a friends house and you have too many board games to pick one?<br />
+    <p>
+        Have you ever gone over to a friends house and you have too many board games to pick one?<br />
         This website allows you enter your BoardGameGeek username, so we can search each player's collection.
     </p>
 </div>
 
-
-
-
-<form style="display: none" id="users" asp-action="CollectionDisplay" asp-controller="Home">
-    <label>Please enter your player's Board Game Geek usernames:</label>
-    @for (int i = 0; i < 3; i++)
-    {
-        <input type="text" name="username" />
+@*@{ int numPlayers = 1; }
+<script>
+    //function showForm() {
+    //    document.getElementById("users").style.visibility = 'visible';
+    //}
+    var players;
+    function changePlayers() {
+        var x = document.getElementById("mySelect".value);
+        x = parseInt(x);
+        players = x.value;
+        document.getElementById("users").style.visibility = 'visible';
     }
-    <input type="submit" value="Grab a Game!" />
 
+    function genForm(players) {
+
+    }
+
+</script>*@
+
+
+<form asp-action="CollectionDisplay" asp-controller="Home">
+    <div id="people-container">
+        <h3>Username 1:</h3>
+        <p>
+            <input name="username[]">
+        </p>
+    </div>
+
+    <a href="javascript:;" id="add-new-person">Add New Username</a>
+
+    <p>
+        <input type="submit">
+    </p>
 </form>
+
+<script>
+    let i = 2;
+    document.getElementById('add-new-person').onclick = function () {
+        let template = `
+        <h3>Username ${i}:</h3>
+        <p>
+            <input name="username[]">
+        </p>`;
+
+        let container = document.getElementById('people-container');
+        let div = document.createElement('div');
+        div.innerHTML = template;
+        container.appendChild(div);
+
+        i++;
+    }
+</script>
+
+
+
+
+@*<body style="align-content:center">
+
+    <button onclick="showForm()">Show!</button>
+
+    <label>Choose # of Players</label>
+    <select id="mySelect" onchange="changePlayers()">
+        <option value="Choose" selected="selected"># of players</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+        <option value="4">Four</option>
+        <option value="5">Five</option>
+        <option value="6">Six</option>
+    </select>
+
+    <form style="visibility: hidden" id="users" asp-action="CollectionDisplay" asp-controller="Home">
+        <label>Please enter your player's Board Game Geek usernames:</label>
+        <hr />
+        <label>Board Game Geek Usernames:</label><br />
+        @for (int i = 0; i < ; i++)
+        {
+            <input type="text" name="usernames[@i.ToString()]" />
+        }
+        <hr />
+        <input type="submit" value="Grab a Game!" />
+
+    </form>
+</body>*@

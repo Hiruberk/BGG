@@ -29,7 +29,7 @@ namespace BGGApp.Models
     {
         public _Attributes1 _attributes { get; set; }
         public Name name { get; set; }
-        public Yearpublished yearpublished { get; set; }
+        public string yearpublished { get; set; }
         public Image image { get; set; }
         public Thumbnail thumbnail { get; set; }
         public Status status { get; set; }
@@ -53,11 +53,6 @@ namespace BGGApp.Models
     public class _Attributes2
     {
         public string sortindex { get; set; }
-    }
-
-    public class Yearpublished
-    {
-        public string _text { get; set; }
     }
 
     public class Image
