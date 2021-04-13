@@ -1,11 +1,26 @@
 ﻿@model List<GameRoot>
 
+@{ Random rng = new Random();
+    int index = rng.Next(0, Model.Count);
+
+}
+
+<h3>Random Game!!</h3>
+<hr />
+<img src="@Model[index].Item.Image" />
+<br />
+<p>Title: @Model[index].Item.Name</p>
+<br />
+<p>Description: @Model[index].Item.Description</p>
+<hr />
+<br />
+
 <ul>
     @foreach (GameRoot game in Model)
     {
-        if (game.games.game.name1 != null)
+        if (game != null)
         {
-            <li>@game.games.game.name1</li>
+            <li>@game.Item.Name</li>
         }
 
     }

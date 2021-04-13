@@ -2,183 +2,196 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BGGApp.Models
 {
 
+	// using System.Xml.Serialization;
+	// XmlSerializer serializer = new XmlSerializer(typeof(Items));
+	// using (StringReader reader = new StringReader(xml))
+	// {
+	//    var test = (Items)serializer.Deserialize(reader);
+	// }
 
-    public class GameRoot
-    {
-        public Games games { get; set; }
-    }
+	[XmlRoot(ElementName = "name")]
+	public class Name
+	{
 
-    public class Games
-    {
-        public Attributes attributes { get; set; }
-        public Game game { get; set; }
-    }
+		[XmlAttribute(AttributeName = "type")]
+		public string Type { get; set; }
 
-    public class Attributes
-    {
-        public string termsofuse { get; set; }
-    }
+		[XmlAttribute(AttributeName = "sortindex")]
+		public int Sortindex { get; set; }
 
-    public class Game
-    {
-        public Attributes1 attributes { get; set; }
-        public Thumbnail1 thumbnail1 { get; set; }
-        public Image1 image { get; set; }
-        public Name1 name1 { get; set; }
-        public Description description { get; set; }
-        public Yearpublished1 yearpublished1 { get; set; }
-        public Minplayers minplayers { get; set; }
-        public Maxplayers maxplayers { get; set; }
-        public List<Poll> poll { get; set; }
-        public Playingtime playingtime { get; set; }
-        public Minplaytime minplaytime { get; set; }
-        public Maxplaytime maxplaytime { get; set; }
-        public Minage minage { get; set; }
-        public List<Link> link { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public string Value { get; set; }
+	}
 
-    public class Attributes1
-    {
-        public string type { get; set; }
-        public string id { get; set; }
-    }
+	[XmlRoot(ElementName = "yearpublished")]
+	public class Yearpublished
+	{
 
-    public class Thumbnail1
-    {
-        public string _text { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public int Value { get; set; }
+	}
 
-    public class Image1
-    {
-        public string _text { get; set; }
-    }
+	[XmlRoot(ElementName = "minplayers")]
+	public class Minplayers
+	{
 
-    public class Name1
-    {
-        public Attributes2 attributes { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public int Value { get; set; }
+	}
 
-    public class Attributes2
-    {
-        public string type { get; set; }
-        public string sortindex { get; set; }
-        public string value { get; set; }
-    }
+	[XmlRoot(ElementName = "maxplayers")]
+	public class Maxplayers
+	{
 
-    public class Description
-    {
-        public string _text { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public int Value { get; set; }
+	}
 
-    public class Yearpublished1
-    {
-        public Attributes3 attributes { get; set; }
-    }
+	[XmlRoot(ElementName = "results")]
+	public class Results
+	{
 
-    public class Attributes3
-    {
-        public string value { get; set; }
-    }
+		[XmlAttribute(AttributeName = "numplayers")]
+		public string Numplayers { get; set; }
+	}
 
-    public class Minplayers
-    {
-        public _Attributes4 _attributes { get; set; }
-    }
+	[XmlRoot(ElementName = "poll")]
+	public class Poll
+	{
 
-    public class _Attributes4
-    {
-        public string value { get; set; }
-    }
+		[XmlElement(ElementName = "results")]
+		public Results Results { get; set; }
 
-    public class Maxplayers
-    {
-        public _Attributes5 _attributes { get; set; }
-    }
+		[XmlAttribute(AttributeName = "name")]
+		public string Name { get; set; }
 
-    public class _Attributes5
-    {
-        public string value { get; set; }
-    }
+		[XmlAttribute(AttributeName = "title")]
+		public string Title { get; set; }
 
-    public class Playingtime
-    {
-        public _Attributes6 _attributes { get; set; }
-    }
+		[XmlAttribute(AttributeName = "totalvotes")]
+		public int Totalvotes { get; set; }
+	}
 
-    public class _Attributes6
-    {
-        public string value { get; set; }
-    }
+	[XmlRoot(ElementName = "playingtime")]
+	public class Playingtime
+	{
 
-    public class Minplaytime
-    {
-        public _Attributes7 _attributes { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public int Value { get; set; }
+	}
 
-    public class _Attributes7
-    {
-        public string value { get; set; }
-    }
+	[XmlRoot(ElementName = "minplaytime")]
+	public class Minplaytime
+	{
 
-    public class Maxplaytime
-    {
-        public _Attributes8 _attributes { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public int Value { get; set; }
+	}
 
-    public class _Attributes8
-    {
-        public string value { get; set; }
-    }
+	[XmlRoot(ElementName = "maxplaytime")]
+	public class Maxplaytime
+	{
 
-    public class Minage
-    {
-        public _Attributes9 _attributes { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public int Value { get; set; }
+	}
 
-    public class _Attributes9
-    {
-        public string value { get; set; }
-    }
+	[XmlRoot(ElementName = "minage")]
+	public class Minage
+	{
 
-    public class Poll
-    {
-        public _Attributes10 _attributes { get; set; }
-        public Results results { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public int Value { get; set; }
+	}
 
-    public class _Attributes10
-    {
-        public string name { get; set; }
-        public string title { get; set; }
-        public string totalvotes { get; set; }
-    }
+	[XmlRoot(ElementName = "link")]
+	public class Link
+	{
 
-    public class Results
-    {
-        public _Attributes11 _attributes { get; set; }
-    }
+		[XmlAttribute(AttributeName = "type")]
+		public string Type { get; set; }
 
-    public class _Attributes11
-    {
-        public string numplayers { get; set; }
-    }
+		[XmlAttribute(AttributeName = "id")]
+		public int Id { get; set; }
 
-    public class Link
-    {
-        public _Attributes12 _attributes { get; set; }
-    }
+		[XmlAttribute(AttributeName = "value")]
+		public string Value { get; set; }
 
-    public class _Attributes12
-    {
-        public string type { get; set; }
-        public string id { get; set; }
-        public string value { get; set; }
-        public string inbound { get; set; }
-    }
+		[XmlAttribute(AttributeName = "inbound")]
+		public bool Inbound { get; set; }
+	}
+
+	[XmlRoot(ElementName = "item")]
+	public class Item
+	{
+
+		[XmlElement(ElementName = "thumbnail")]
+		public string Thumbnail { get; set; }
+
+		[XmlElement(ElementName = "image")]
+		public string Image { get; set; }
+
+		[XmlElement(ElementName = "name")]
+		public Name Name { get; set; }
+
+		[XmlElement(ElementName = "description")]
+		public string Description { get; set; }
+
+		[XmlElement(ElementName = "yearpublished")]
+		public Yearpublished Yearpublished { get; set; }
+
+		[XmlElement(ElementName = "minplayers")]
+		public Minplayers Minplayers { get; set; }
+
+		[XmlElement(ElementName = "maxplayers")]
+		public Maxplayers Maxplayers { get; set; }
+
+		[XmlElement(ElementName = "poll")]
+		public List<Poll> Poll { get; set; }
+
+		[XmlElement(ElementName = "playingtime")]
+		public Playingtime Playingtime { get; set; }
+
+		[XmlElement(ElementName = "minplaytime")]
+		public Minplaytime Minplaytime { get; set; }
+
+		[XmlElement(ElementName = "maxplaytime")]
+		public Maxplaytime Maxplaytime { get; set; }
+
+		[XmlElement(ElementName = "minage")]
+		public Minage Minage { get; set; }
+
+		[XmlElement(ElementName = "link")]
+		public List<Link> Link { get; set; }
+
+		[XmlAttribute(AttributeName = "type")]
+		public string Type { get; set; }
+
+		[XmlAttribute(AttributeName = "id")]
+		public int Id { get; set; }
+
+		[XmlText]
+		public string Text { get; set; }
+	}
+
+	[XmlRoot(ElementName = "Gameroot")]
+	public class GameRoot
+	{
+
+		[XmlElement(ElementName = "item")]
+		public Item Item { get; set; }
+
+		[XmlAttribute(AttributeName = "termsofuse")]
+		public string Termsofuse { get; set; }
+
+		[XmlText]
+		public string Text { get; set; }
+	}
 
 
 }

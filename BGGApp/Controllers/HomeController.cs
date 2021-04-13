@@ -15,12 +15,14 @@ namespace BGGApp.Controllers
 
         public IActionResult Index()
         {
+            TempData.Remove("Error");
             return View();
         }
 
         public IActionResult CollectionDisplay(string[] username)
         {
-            List<CollectionRoot> collections = new List<CollectionRoot>();
+            TempData.Remove("Error");
+            List<items> collections = new List<items>();
             List<GameRoot> games = new List<GameRoot>();
             try
             {
@@ -35,23 +37,26 @@ namespace BGGApp.Controllers
                 return RedirectToAction("Index");
             }
 
-            foreach(CollectionRoot c in collections)
+
+            collections = collections.Distinct().ToList(); ;
+
+            foreach (items c in collections)
             {
-                foreach(Item i in c.items.item)
+                foreach (itemsItem i in c.item)
                 {
-                    if (!String.IsNullOrEmpty(i._attributes.objectid))
-                    {
-                        GameRoot game = new GameRoot();
-                        game = bGGDAL.GetGame(i._attributes.objectid);
-                        games.Add(game);
-                    }
+                    //if (i.info != null)
+                    //{
+                    GameRoot game = new GameRoot();
+                    game = bGGDAL.GetGame(i.objectid.ToString());
+                    games.Add(game);
+                    //}
 
                 }
             }
 
-            if(games.Count > 0)
+            if (games.Count > 0)
             {
-                return View(games);
+                return View(collections);
             }
             else
             {

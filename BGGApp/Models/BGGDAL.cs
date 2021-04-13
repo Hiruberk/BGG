@@ -23,15 +23,30 @@ namespace BGGApp.Models
             return xml;
         }
 
-        public CollectionRoot GetCollection(string username)
+        public items GetCollection(string username)
         {
             string xml = GetCollectionData(username);
-            XmlDocument doc = new XmlDocument();
-            doc.LoadXml(xml);
+            items i = DeserializeToObject<items>(xml);
 
-            string json = JsonConvert.SerializeXmlNode(doc);
-            CollectionRoot i = JsonConvert.DeserializeObject<CollectionRoot>(json);
+
+            //XmlDocument doc = new XmlDocument();
+            //doc.LoadXml(xml);
+
+            //string json = JsonConvert.SerializeXmlNode(doc);
+            //json = json.Replace("@", "");
+            //json = json.Remove(0, json.IndexOf('{'));
+            //CollectionRoot i = JsonConvert.DeserializeObject<CollectionRoot>(json);
             return i;
+        }
+
+        public T DeserializeToObject<T>(string filepath) where T : class
+        {
+            System.Xml.Serialization.XmlSerializer ser = new System.Xml.Serialization.XmlSerializer(typeof(T));
+
+            using (StreamReader sr = new StreamReader(filepath))
+            {
+                return (T)ser.Deserialize(sr);
+            }
         }
 
         public string GetGameData(string id)
